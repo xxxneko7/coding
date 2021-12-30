@@ -1,6 +1,6 @@
-package utils;
+package com.sol.algorithm.utils;
 
-import structure.ListNode;
+import com.sol.algorithm.structure.ListNode;
 
 public class LinkedListUtil {
 

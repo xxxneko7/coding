@@ -1,4 +1,4 @@
-package structure;
+package com.sol.algorithm.structure;
 
 public class ListNode {
     public int val;

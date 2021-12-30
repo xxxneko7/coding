@@ -1,8 +1,9 @@
-package subject.linkedList;
+package com.sol.algorithm.subject.linkedList;
 
-import beans.Solution;
-import structure.ListNode;
-import utils.LinkedListUtil;
+
+import com.sol.algorithm.beans.Solution;
+import com.sol.algorithm.structure.ListNode;
+import com.sol.algorithm.utils.LinkedListUtil;
 
 public class N21 implements Solution {
     @Override

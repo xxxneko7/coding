@@ -1,4 +1,4 @@
-package beans;
+package com.sol.algorithm.beans;
 
 public class Subject {
     public Solution solution;
