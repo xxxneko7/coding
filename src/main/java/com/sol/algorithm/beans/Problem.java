@@ -1,9 +1,11 @@
 package com.sol.algorithm.beans;
 
-public class Subject {
+import com.sol.algorithm.beans.Solution;
+
+public class Problem {
     public Solution solution;
 
-    public Subject(Solution solution) {
+    public Problem(com.sol.algorithm.beans.Solution solution) {
         this.solution = solution;
     }
 

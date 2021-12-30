@@ -1,4 +1,4 @@
-package com.sol.algorithm.subject.linkedList;
+package com.sol.algorithm.solutions.linkedList;
 
 
 import com.sol.algorithm.beans.Solution;
