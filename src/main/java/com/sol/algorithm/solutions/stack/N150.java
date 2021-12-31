@@ -10,19 +10,19 @@ public class N150 implements Solution {
 
     }
 
-    public long evalRPN(String[] tokens) {
-        Stack<Long> stack = new Stack<>();
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> numbers = new Stack<>();
         for (String token : tokens) {
             if ("+".equals(token) || "-".equals(token) || "*".equals(token) || "/".equals(token)) {
-                stack.push(calc(stack.pop(), stack.pop(), token));
+                numbers.push(calc(numbers.pop(), numbers.pop(), token));
             } else {
-                stack.push(Long.parseLong(token));
+                numbers.push(Integer.parseInt(token));
             }
         }
-        return stack.peek();
+        return numbers.peek();
     }
 
-    private long calc(long x, long y, String op) {
+    private int calc(int y, int x, String op) {
         if ("+".equals(op)) return x + y;
         if ("-".equals(op)) return x - y;
         if ("*".equals(op)) return x * y;
