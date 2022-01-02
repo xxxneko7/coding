@@ -2,8 +2,8 @@
 
 ### 作业
 #### 第1周
-- 加一 
-- [合并两个有序链表](https://github.com/xxxneko7/coding/blob/master/src/main/java/com/sol/algorithm/problem/linkedList/N21.java)
+- [加一](#)
+- [合并两个有序链表](https://github.com/xxxneko7/coding/blob/master/src/main/java/com/sol/algorithm/solutions/linkedList/N21.java)
 - 设计循环双端队列
 - 最大矩形
 
