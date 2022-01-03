@@ -1,20 +1,19 @@
 package com.sol.algorithm.solutions.linkedList;
 
 
-import com.sol.algorithm.beans.Solution;
 import com.sol.algorithm.structure.ListNode;
-import com.sol.algorithm.utils.LinkedListUtil;
 
-public class N21 implements Solution {
-    @Override
-    public void solve() {
-        ListNode list1 = LinkedListUtil.create(new int[]{1, 3, 4});
-        ListNode list2 = LinkedListUtil.create(new int[]{1, 2, 4});
-        ListNode head = mergeTwoLists(list1, list2);
-        LinkedListUtil.print(head);
-    }
-
-    /*public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+/**
+ * 21. 合并两个有序链表
+ */
+public class N21 {
+    /**
+     * 迭代
+     *
+     * <li>时间复杂度：O(n+m)</li>
+     * <li>空间复杂度：O(1)</li>
+     */
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         ListNode cur = new ListNode();
         ListNode head = cur;
         while (list1 != null && list2 != null) {
@@ -29,8 +28,15 @@ public class N21 implements Solution {
         }
         cur.next = list1 != null ? list1 : list2;
         return head.next;
-    }*/
+    }
 
+    /**
+     * 递归
+     *
+     * <li>时间复杂度：O(n+m)</li>
+     * <li>空间复杂度：O(n+m)</li>
+     */
+    /*
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null) return list2;
         if (list2 == null) return list1;
@@ -41,5 +47,5 @@ public class N21 implements Solution {
             list2.next = mergeTwoLists(list1, list2.next);
             return list2;
         }
-    }
+    }*/
 }

@@ -1,15 +1,9 @@
 package com.sol.algorithm.solutions.stack;
 
-import com.sol.algorithm.beans.Solution;
 
 import java.util.Stack;
 
-public class N150 implements Solution {
-    @Override
-    public void solve() {
-
-    }
-
+public class N150  {
     public int evalRPN(String[] tokens) {
         Stack<Integer> numbers = new Stack<>();
         for (String token : tokens) {

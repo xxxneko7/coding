@@ -1,15 +1,14 @@
 package com.sol.algorithm.solutions.stack;
 
-import com.sol.algorithm.beans.Solution;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
-public class N227 implements Solution {
-    @Override
-    public void solve() {
-        println("" + calculate("1*2-3/4+5*6-7*8+9/10"));
+import static java.lang.System.out;
+
+public class N227 {
+    public static void main(String[] args) {
+        N227 solution = new N227();
+        out.println(solution.calculate("1*2-3/4+5*6-7*8+9/10"));
     }
 
     public int calculate(String s) {

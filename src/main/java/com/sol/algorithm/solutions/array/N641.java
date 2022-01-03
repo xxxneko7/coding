@@ -1,21 +1,24 @@
 package com.sol.algorithm.solutions.array;
 
 
-import com.sol.algorithm.beans.Solution;
+/**
+ * 641. 设计循环双端队列
+ */
+public class N641 {
 
-public class N641 implements Solution {
-    @Override
-    public void solve() {
-
-    }
-
-    public class MyCircularDeque {
+    public static class MyCircularDeque {
         private int[] container;
         private int head, tail;
 
+        /**
+         * 容器保留一个空位，用来区分队列【空】和【满】
+         * <p>
+         * 【head】指向队首元素，【tail】指向队尾元素
+         */
         public MyCircularDeque(int k) {
             container = new int[k + 1];
-            head = tail = 0;
+            head = 1;
+            tail = 0;
         }
 
         private int moveForward(int cur) {
@@ -39,8 +42,8 @@ public class N641 implements Solution {
             if (isFull()) {
                 return false;
             }
-            container[tail] = value;
             tail = moveBackward(tail);
+            container[tail] = value;
             return true;
         }
 
@@ -62,29 +65,29 @@ public class N641 implements Solution {
 
         public int getFront() {
             if (isEmpty()) {
-                throw new RuntimeException("empty");
+                return -1;
             }
             return container[head];
         }
 
         public int getRear() {
             if (isEmpty()) {
-                throw new RuntimeException("empty");
+                return -1;
             }
-            return container[tail - 1];
+            return container[tail];
         }
 
         public boolean isEmpty() {
-            return head == tail;
+            return head == moveBackward(tail);
         }
 
         public boolean isFull() {
-            return moveBackward(tail) == head;
+            return moveBackward(tail) == moveForward(head);
         }
 
         public int getLength() {
-            int len = tail - head;
-            return len > 0 ? len : container.length + len;
+            int len = tail - head + 1;
+            return len >= 0 ? len : container.length + len;
         }
 
         @Override

@@ -1,42 +1,50 @@
 package com.sol.algorithm.solutions.stack;
 
-import com.sol.algorithm.beans.Solution;
-import sun.security.util.ArrayUtil;
-
-import java.util.Arrays;
 import java.util.Stack;
 
-public class N84 implements Solution {
-    @Override
-    public void solve() {
-
+/**
+ * 84. 柱状图中最大的矩形
+ */
+public class N84 {
+    public static void main(String[] args) {
+        N84 solution = new N84();
+        System.out.println(solution.largestRectangleArea(new int[]{2, 4}));
     }
 
+
+    /**
+     * <li>时间复杂度：O(n)</li>
+     * <li>空间复杂度：O(n)</li>
+     */
     public int largestRectangleArea(int[] heights) {
+        int len = heights.length;
+        if (len == 0) {
+            return 0;
+        }
+        if (len == 1) {
+            return heights[0];
+        }
+
+        // 高度单调递增的矩形下标栈
+        Stack<Integer> indexes = new Stack<>();
+
+        // 高度数组头尾增加高度为0的哨兵，避免边界判断：
+        // 1. 首位增加0，作为第一个矩形的左边界
+        // 2. 末位增加0，作为最后一个矩形的右边界
+        int[] newHeight;
+        newHeight = new int[len + 2];
+        System.arraycopy(heights, 0, newHeight, 1, len);
+        indexes.push(0);
+
         int maxArea = 0;
-        Stack<int[]> minHeights = new Stack<>();
-        for (int i = 0; i < heights.length; i++) {
-            int height = heights[i];
-            if (!minHeights.isEmpty() && minHeights.peek()[0] > height) {
-                maxArea = Math.max(maxArea, calcMaxArea(minHeights, i));
+        for (int i = 1; i < len + 2; i++) {
+            while (newHeight[indexes.peek()] > newHeight[i]) {
+                int height = newHeight[indexes.pop()];
+                int width = i - indexes.peek() - 1;
+                maxArea = Math.max(maxArea, width * height);
             }
-            minHeights.push(new int[]{height, i});
-        }
-        maxArea = Math.max(maxArea, calcMaxArea(minHeights, heights.length));
-        return maxArea;
-    }
-
-    private int calcMaxArea(Stack<int[]> minHeights, int r) {
-        int maxArea = 0;
-        while (!minHeights.isEmpty()) {
-            int[] height_idx = minHeights.pop();
-            maxArea = Math.max(maxArea, calcArea(height_idx[1], r, height_idx[0]));
+            indexes.push(i);
         }
         return maxArea;
     }
-
-    private int calcArea(int l, int r, int minHeight) {
-        return (r - l) * minHeight;
-    }
-
 }

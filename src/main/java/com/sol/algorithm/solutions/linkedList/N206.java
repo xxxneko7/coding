@@ -1,17 +1,16 @@
 package com.sol.algorithm.solutions.linkedList;
 
-import com.sol.algorithm.beans.Solution;
 import com.sol.algorithm.structure.ListNode;
-import com.sol.algorithm.utils.LinkedListUtil;
 
-public class N206 implements Solution {
-    @Override
-    public void solve() {
-        ListNode head = LinkedListUtil.create(new int[]{1, 2, 3});
-        head = reverseList(head);
-        LinkedListUtil.print(head);
-    }
+/**
+ * 206. 反转链表
+ */
+public class N206 {
 
+    /**
+     * <li> 时间复杂度：O(n) </li>
+     * <li> 空间复杂度：O(1) </li>
+     */
     public ListNode reverseList(ListNode head) {
         if (head == null)
             return null;

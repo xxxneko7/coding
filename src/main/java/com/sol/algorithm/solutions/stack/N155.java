@@ -1,15 +1,9 @@
 package com.sol.algorithm.solutions.stack;
 
-import com.sol.algorithm.beans.Solution;
 
 import java.util.Stack;
 
-public class N155 implements Solution {
-    @Override
-    public void solve() {
-
-    }
-
+public class N155  {
     class MinStack {
         Stack<Integer> values;
         Stack<Integer> indexesOfMinVal;
