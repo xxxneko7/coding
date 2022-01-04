@@ -13,11 +13,17 @@ public class N697 {
     }
 
     private class SubArray {
-        /** 数出现的频数 */
+        /**
+         * 数出现的频数
+         */
         int freq;
-        /** 数第一次出现的下标 */
+        /**
+         * 数第一次出现的下标
+         */
         int firstIdx;
-        /** 子数组的长度 */
+        /**
+         * 子数组的长度
+         */
         int len;
 
         public SubArray(int firstIdx) {
@@ -33,8 +39,9 @@ public class N697 {
      */
     public int findShortestSubArray(int[] nums) {
         // 数到子数组对象的映射，用来统计数出现的频数和子数组的长度
-        Map<Integer, SubArray> numToSubArray = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
+        int n = nums.length;
+        Map<Integer, SubArray> numToSubArray = new HashMap<>(n);
+        for (int i = 0; i < n; i++) {
             SubArray subArray = numToSubArray.get(nums[i]);
             if (subArray == null) {
                 numToSubArray.put(nums[i], new SubArray(i));
@@ -44,7 +51,7 @@ public class N697 {
             }
         }
         // 找到数出现频数最大的度，及其对应最短子数组的长度
-        int degree = 0, minLen = nums.length;
+        int degree = 0, minLen = n;
         for (SubArray subArray : numToSubArray.values()) {
             if (degree < subArray.freq) {
                 degree = subArray.freq;
