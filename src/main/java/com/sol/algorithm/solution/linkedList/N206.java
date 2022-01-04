@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.linkedList;
+package com.sol.algorithm.solution.linkedList;
 
 import com.sol.algorithm.structure.ListNode;
 

@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.linkedList;
+package com.sol.algorithm.solution.linkedList;
 
 
 import com.sol.algorithm.structure.ListNode;
@@ -9,7 +9,8 @@ import com.sol.algorithm.structure.ListNode;
 public class N21 {
     /**
      * 迭代
-     *
+     * <p>
+     * n、m分别为【list1】、【list2】的长度
      * <li>时间复杂度：O(n+m)</li>
      * <li>空间复杂度：O(1)</li>
      */
@@ -32,7 +33,8 @@ public class N21 {
 
     /**
      * 递归
-     *
+     * <p>
+     * n、m分别为【list1】、【list2】的长度
      * <li>时间复杂度：O(n+m)</li>
      * <li>空间复杂度：O(n+m)</li>
      */

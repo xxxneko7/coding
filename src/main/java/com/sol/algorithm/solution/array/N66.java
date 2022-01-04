@@ -1,10 +1,11 @@
-package com.sol.algorithm.solutions.array;
+package com.sol.algorithm.solution.array;
 
 /**
  * 66. 加一
  */
 public class N66 {
     /**
+     * n为【digits】数组的长度
      * <li>时间复杂度：O(n)</li>
      * <li>空间复杂度：O(1)</li>
      */

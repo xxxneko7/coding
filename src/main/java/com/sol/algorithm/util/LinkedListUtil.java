@@ -1,4 +1,4 @@
-package com.sol.algorithm.utils;
+package com.sol.algorithm.util;
 
 import com.sol.algorithm.structure.ListNode;
 

@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.array;
+package com.sol.algorithm.solution.array;
 
 
 /**

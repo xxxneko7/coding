@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.stack;
+package com.sol.algorithm.solution.stack;
 
 
 import java.util.Stack;
@@ -19,7 +19,8 @@ public class N85 {
      * (l < h < r，且 heights[l] < heights[h] < heights[r]) 的乘积。
      * 如果我们确保 (l, r) 之间的矩形高度单调递增，则 Min(heights[h]) = heights[l+1]。
      * 实现时，因为我们从左到右遍历输入矩阵，所以先确定右边界，再动态调整左边界计算有效矩形的面积。
-     *
+     * <p>
+     * m、n分别为【matrix】的行、列数
      * <li>时间复杂度：O(m*n)</li>
      * <li>空间复杂度：O(n)</li>
      */

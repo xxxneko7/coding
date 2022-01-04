@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.array;
+package com.sol.algorithm.solution.array;
 
 /**
  * 26. 删除有序数组中的重复项

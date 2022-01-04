@@ -1,4 +1,4 @@
-package com.sol.algorithm.solutions.stack;
+package com.sol.algorithm.solution.stack;
 
 import java.util.Stack;
 
