@@ -7,13 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * // 截取第一个'.'之后的字符串作为新的【domain】，找不到时退出循环
- * int idxOfFirstDot = domain.indexOf('.');
- * if (idxOfFirstDot < 0) {
- * break;
- * } else {
- * domain = domain.substring(idxOfFirstDot + 1);
- * }
  * 811. 子域名访问计数
  */
 public class N811 {
@@ -32,25 +25,22 @@ public class N811 {
 
         for (String cpdomain : cpdomains) {
             char[] domain = cpdomain.toCharArray();
-            int idx = 0, n = domain.length;
+            int idx = cpdomain.indexOf(' '), n = domain.length;
+            // ' '之前的字符串解析为访问次数【rep】
             StringBuilder sb = new StringBuilder();
             while (idx < n && domain[idx] != ' ') {
                 sb.append(domain[idx++]);
             }
             int rep = Integer.parseInt(sb.toString());
+            // domain[idx]为' '或'.'，因此截取【idx】的下一个位置到【domain】末尾的字符作为【subdomain】
             while (idx++ < n) {
                 String subdomain = new String(domain, idx, domain.length - idx);
                 domainToRep.put(subdomain, rep + domainToRep.getOrDefault(subdomain, 0));
-                while (idx < n && domain[idx] != '.') idx++;
+                // 【idx】指向下一个'.'
+                while (idx < n && domain[idx] != '.') {
+                    idx++;
+                }
             }
-/*            String[] repAndDomain = cpdomain.split(" ");
-            int rep = Integer.parseInt(repAndDomain[0]);
-            char[] domain = repAndDomain[1].toCharArray();
-            for (int i = 0; i < domain.length; i++) {
-                String subdomain = new String(domain, i, domain.length - i);
-                domainToRep.put(subdomain, rep + domainToRep.getOrDefault(subdomain, 0));
-                while (i < domain.length && domain[i] != '.') i++;
-            }*/
         }
         // 将结果转化为字符串数组
         List<String> res = new ArrayList<>();
