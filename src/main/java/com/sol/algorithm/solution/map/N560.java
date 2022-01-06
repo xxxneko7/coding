@@ -14,12 +14,13 @@ public class N560 {
      * <li> 空间复杂度：O(n) </li>
      */
     public int subarraySum(int[] nums, int k) {
-        Map<Integer, Integer> preAndToNum = new HashMap<>();
-        int count = 0, preAnd = 0;
+        Map<Integer, Integer> preSumToNum = new HashMap<>();
+        preSumToNum.put(0, 1);
+        int count = 0, preSum = 0;
         for (int num : nums) {
-            preAnd += num;
-            count += preAndToNum.getOrDefault(preAnd - k, 0);
-            preAndToNum.put(preAnd, preAndToNum.getOrDefault(preAnd, 0) + 1);
+            preSum += num;
+            count += preSumToNum.getOrDefault(preSum - k, 0);
+            preSumToNum.put(preSum, preSumToNum.getOrDefault(preSum, 0) + 1);
         }
         return count;
     }
