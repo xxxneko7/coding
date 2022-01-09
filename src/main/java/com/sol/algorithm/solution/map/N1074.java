@@ -20,7 +20,7 @@ public class N1074 {
      * <p>
      * m、n分别为【matrix】的行、列数 <br>
      * - 时间复杂度：O(m^2 * n) <br>
-     * - 空间复杂度：O(m) <br>
+     * - 空间复杂度：O(n) <br>
      *
      * @param matrix 矩阵
      * @param target 目标值
