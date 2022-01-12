@@ -5,9 +5,9 @@ package com.sol.algorithm.solution.array;
  */
 public class N66 {
     /**
-     * n为【digits】数组的长度
-     * <li>时间复杂度：O(n)</li>
-     * <li>空间复杂度：O(1)</li>
+     * n为【digits】数组的长度 <br>
+     * - 时间复杂度：O(n) <br>
+     * - 空间复杂度：O(1) <br>
      */
     public int[] plusOne(int[] digits) {
         int idx = digits.length - 1;

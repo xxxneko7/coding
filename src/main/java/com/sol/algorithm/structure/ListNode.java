@@ -1,5 +1,8 @@
 package com.sol.algorithm.structure;
 
+/**
+ * 链表节点
+ */
 public class ListNode {
     public int val;
     public ListNode next;

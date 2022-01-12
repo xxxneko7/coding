@@ -23,7 +23,8 @@ public class N1248 {
         preSumToNum.put(0, 1);
         int count = 0, preSum = 0;
         for (int num : nums) {
-            preSum += (num % 2);
+            // 子数组中奇数的个数，等于 子数组中的数模2（或按位与1） 再求和
+            preSum += (num & 1);
             count += preSumToNum.getOrDefault(preSum - k, 0);
             preSumToNum.put(preSum, preSumToNum.getOrDefault(preSum, 0) + 1);
         }

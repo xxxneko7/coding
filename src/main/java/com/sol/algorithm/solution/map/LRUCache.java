@@ -23,8 +23,8 @@ public class LRUCache {
             return -1;
         }
         BiListNode node = map.get(key);
-        removeNode(node);
-        addLast(node);
+        remove(node);
+        insert(node);
         return node.val;
     }
 
@@ -33,29 +33,29 @@ public class LRUCache {
         if (map.containsKey(key)) {
             node = map.get(key);
             node.val = value;
-            removeNode(node);
-            addLast(node);
+            remove(node);
+            insert(node);
             return;
         }
         node = new BiListNode(key, value);
         if (size == capacity) {
             map.remove(head.next.key);
-            removeNode(head.next);
+            remove(head.next);
         } else {
             size++;
         }
         map.put(key, node);
-        addLast(node);
-        System.out.println(map);
+        insert(node);
     }
 
-    private void addLast(BiListNode node) {
+    private void insert(BiListNode node) {
         tail.pre.next = node;
-        tail.pre = node;
+        node.pre = tail.pre;
         node.next = tail;
+        tail.pre = node;
     }
 
-    private void removeNode(BiListNode node) {
+    private void remove(BiListNode node) {
         node.pre.next = node.next;
         node.next.pre = node.pre;
     }
