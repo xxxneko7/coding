@@ -3,6 +3,7 @@
 ### 作业
 #### 第3周
 - [47. 全排列 II][LC47]
+- [210. 课程表 II][LC210]
 
 #### 第2周
 - [811. 子域名访问计数][LC811]
@@ -22,6 +23,8 @@
 [LC21]: linkedList/N21.java
 [LC141]: linkedList/N141.java
 [LC206]: linkedList/N206.java
+
+[LC210]: bfs/N210.java
 
 [array]: array
 [LC26]: array/N26.java
