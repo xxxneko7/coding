@@ -4,6 +4,8 @@
 #### 第3周
 - [47. 全排列 II][LC47]
 - [210. 课程表 II][LC210]
+- [106. 从中序与后序遍历序列构造二叉树][LC106]
+- [23. 合并K个升序链表][LC23]
 
 #### 第2周
 - [811. 子域名访问计数][LC811]
@@ -19,14 +21,14 @@
 #####
 - [641. 设计循环双端队列][LC641]
 
-[linkedList]: linkedList
 [LC21]: linkedList/N21.java
 [LC141]: linkedList/N141.java
 [LC206]: linkedList/N206.java
+[LC23]: linkedList/N23.java
 
 [LC210]: bfs/N210.java
+[LC106]: map/N106.java
 
-[array]: array
 [LC26]: array/N26.java
 [LC46]: array/N46.java
 [LC47]: array/N47.java
@@ -35,7 +37,6 @@
 [LC641]: array/MyCircularDeque.java
 [MyHashMap]: array/MyHashMap.java
 
-[map]: map
 [LC30]: map/N30.java
 [LC49]: map/N49.java
 [LC560]: map/N560.java
@@ -43,10 +44,8 @@
 [LC811]: map/N811.java
 [LC1074]: map/N1074.java
 
-[set]: set
 [LC874]: set/N874.java
 
-[stack]: stack
 [LC20]: stack/N20.java
 [LC84]: stack/N84.java
 [LC85]: stack/N85.java
