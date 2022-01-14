@@ -14,7 +14,7 @@ public class N106 {
 
     public interface Solution {
         /**
-         * 构造二叉树
+         * 构造二叉树，假设树中没有重复节点
          *
          * @param inorder   中序遍历
          * @param postorder 后序遍历
@@ -91,19 +91,24 @@ public class N106 {
             Stack<TreeNode> stack = new Stack<>();
             stack.push(root);
             int inorderIdx = n - 1;
+            // 逆序查找【中序遍历】数组，依次为 右子树 -> 根节点 -> 左子树
+            // 逆序查找【后序遍历】数组，依次为 根节点 -> 右子树 -> 左子树
             for (int postorderIdx = n - 2; postorderIdx >= 0; postorderIdx--) {
                 TreeNode curNode = stack.peek();
                 int postorderVal = postorder[postorderIdx];
-                // 右节点
+                // 构造右子树
                 if (curNode.val != inorder[inorderIdx]) {
                     curNode.right = new TreeNode(postorderVal);
                     stack.push(curNode.right);
                     continue;
                 }
-                // 左节点
-                while(stack.isEmpty()||){
-
-                }
+                do {
+                    curNode = stack.pop();
+                    inorderIdx--;
+                } while (!stack.isEmpty() || stack.peek().val == inorder[inorderIdx]);
+                // 构造左子树
+                curNode.left = new TreeNode(postorderVal);
+                stack.push(curNode.left);
             }
             return root;
         }
