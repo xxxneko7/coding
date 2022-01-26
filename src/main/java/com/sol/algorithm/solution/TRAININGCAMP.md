@@ -27,8 +27,8 @@
 - [641. 设计循环双端队列][LC641]
 
 [LC130]: dfs/N130.java
-[LC355]: dfs/N355.java.java
-[LC538]: dfs/N538.java.java
+[LC355]: dfs/N355.java
+[LC538]: dfs/N538.java
 
 [LC21]: linkedList/N21.java
 [LC141]: linkedList/N141.java
