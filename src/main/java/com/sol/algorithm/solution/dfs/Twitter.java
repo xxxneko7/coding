@@ -21,17 +21,20 @@ class Twitter {
     }
 
     /**
-     * 获取自己和关注人的最新几条推文
+     * 获取用户和关注人的最新几条推文
      *
      * @param userId 用户ID
      * @return 最新的几条推文
      */
     public List<Integer> getNewsFeed(int userId) {
         User user = getUser(userId);
+        // 多路合并问题，利用 大根堆 对用户和关注人的推文按时间排序
         PriorityQueue<Tweet> maxHeap = new PriorityQueue<>((tweet1, tweet2) -> tweet2.timestamp - tweet1.timestamp);
+        // 添加用户最新的一条推文
         if (user.recentTweet != null) {
             maxHeap.offer(user.recentTweet);
         }
+        // 添加每个关注人最新的一条推文
         if (user.following != null && user.following.size() > 0) {
             for (Integer followingId : user.following) {
                 Tweet recentTweet = getUser(followingId).recentTweet;
@@ -43,7 +46,8 @@ class Twitter {
 
         List<Integer> newsFeed = new ArrayList<>();
         int count = 0;
-        while (!maxHeap.isEmpty() && count++ < MAX_NEWS_FEED) {
+        // 记录最新的推文，并用其上一条推文更新 大根堆
+        while (!maxHeap.isEmpty() && count++ < MAX_NUM_OF_NEWS_FEED) {
             Tweet recentTweet = maxHeap.poll();
             newsFeed.add(recentTweet.id);
             if (recentTweet.last != null) {
@@ -146,7 +150,7 @@ class Twitter {
          */
         public int timestamp;
         /**
-         * 上一条推文
+         * 上一条推文，便于在【堆排序】时替换出堆的元素
          */
         public Tweet last;
 
@@ -160,7 +164,7 @@ class Twitter {
     /**
      * 可查看的最新推文的上限
      */
-    private static final int MAX_NEWS_FEED = 10;
+    private static final int MAX_NUM_OF_NEWS_FEED = 10;
     /**
      * 当前时间
      */
