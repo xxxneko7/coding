@@ -18,7 +18,7 @@ public class N875 {
     public int minEatingSpeed(int[] piles, int h) {
         this.piles = piles;
         // 速度至少是 1，上限为 max(piles)，直接使用 piles[i] 允许的最大值(10^9) 避免计算
-        int minSpeed = 1, upper = 1000000000;
+        int minSpeed = 1, upper = (int)1e9;
         while (minSpeed < upper) {
             int speed = (minSpeed + upper) / 2;
             int time = calTime(speed);
