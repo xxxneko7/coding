@@ -4,6 +4,7 @@
 #### 第5周
 - [74. 搜索二维矩阵][LC74]
 - [154. 寻找旋转排序数组中的最小值 II][LC154]
+- [327. 区间和的个数][LC327]
 - [875. 爱吃香蕉的珂珂][LC875]
 - [911. 在线选举][LC911]
 - [1011. 在 D 天内送达包裹的能力][LC1011]
@@ -38,6 +39,7 @@
 [LC875]: binarySearch/N875.java
 [LC911]: binarySearch/N911.java
 [LC1011]: binarySearch/N1011.java
+[LC327]: binarySearch/N327.java
 
 [LC130]: dfs/N130.java
 [LC355]: dfs/Twitter.java
