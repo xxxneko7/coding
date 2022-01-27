@@ -8,7 +8,7 @@ import com.sol.algorithm.structure.TreeNode;
 public class N538 {
     /**
      * 把二叉搜索树转换为累加树 <br>
-     * 解题思路：按照【右子树 -> 根节点 -> 左子树】的顺序遍历 BST。并记录累加值
+     * 解题思路：按照【右子树 -> 根节点 -> 左子树】的顺序遍历 BST，并记录累加值 构造累加树
      * <p>
      * n 为 BST 节点个数 <br>
      * - 时间复杂度：O(n!) <br>
