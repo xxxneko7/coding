@@ -16,7 +16,9 @@ public class N327 {
         this.lower = lower;
         this.upper = upper;
         int count = 0;
+        for (int num : nums) {
 
+        }
         return count;
     }
 

@@ -56,9 +56,6 @@ public class N911 {
                     r = m - 1;
                 } else if (times[m] < t) {
                     l = m;
-                } else {
-                    l = m;
-                    break;
                 }
             }
             return topAtTimes.get(l);
