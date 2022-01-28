@@ -7,7 +7,7 @@ import java.util.Arrays;
  */
 public class N327 {
     public static void main(String[] args) {
-        System.out.println(new N327().countRangeSum(new int[]{2147483647,-2147483648,-1,0}, -1, 0));
+        System.out.println(new N327().countRangeSum(new int[]{2147483647, -2147483648, -1, 0}, -1, 0));
     }
 
     /**
@@ -27,12 +27,11 @@ public class N327 {
         for (int i = 0; i < n; i++) {
             preSums[i + 1] = preSums[i] + nums[i];
         }
-//        Arrays.sort(preSums);
         return countRangeSum(0, preSums.length - 1);
     }
 
     /**
-     * 计算 [l, r] 内 nums 满足条件的区间和个数
+     * 计算 {@code preSum[p], p ∈ [l, r]} 内满足条件的区间和个数
      *
      * @param l 左边界
      * @param r 右边界
@@ -40,31 +39,38 @@ public class N327 {
      */
     private int countRangeSum(int l, int r) {
         if (l == r) return 0;
-        // 划分为两个【升序子数组】 preSums[k], k ∈ [l, m] 和 preSums[t], t ∈ [m+1, r]
+        // 划分为两个【升序子数组】
         int m = (l + r) / 2;
-        int count = countRangeSum(l, m) + countRangeSum(m + 1, r);
-        // 计算符合条件的下标对，使得 lower <= preSums[t] - preSums[k] <= upper, t ∈ [i, j)
-        int i = m + 1, j;
-        for (int k = l; k <= m; k++) {
-            while (i <= r && preSums[i] - preSums[k] < lower) i++;
-            j = i;
-            while (j <= r && preSums[j] - preSums[k] <= upper) j++;
+        return countRangeSum(l, m) + countRangeSum(m + 1, r) + countRangeSumOfMerge(l, m, r);
+    }
+
+    /**
+     * 计算 {@code preSum[p1], i1 ∈ [l, m]} 与 {@code preSum[p2], i2 ∈ [m+1, r]} 合并后满足条件的区间和个数
+     *
+     * @param l 左边界
+     * @param m 中点
+     * @param r 右边界
+     * @return 满足条件的区间和个数
+     */
+    private int countRangeSumOfMerge(int l, int m, int r) {
+        int i = m + 1, j = m + 1;
+        int count = 0;
+        long[] sorted = new long[r - l + 1];
+        int s = 0, p1 = l, p2 = m + 1;
+        while (p1 <= m) {
+            // 1. 计算符合条件的下标对，使得 lower <= preSums[p2] - preSums[p1] <= upper, p2 ∈ [i, j)
+            long lowerOfP2 = lower + preSums[p1], upperOfP2 = upper + preSums[p1];
+            while (i <= r && preSums[i] < lowerOfP2) i++;
+            while (j <= r && preSums[j] <= upperOfP2) j++;
             count += (j - i);
+            // 2. 对区间 [l, r] 内的前缀和按升序排序
+            while (p2 <= r && preSums[p2] < preSums[p1]) sorted[s++] = preSums[p2++];
+            sorted[s++] = preSums[p1++];
         }
-        if (l == 0 && r == preSums.length - 1) {
-            return count;
+        while (p2 <= r) {
+            sorted[s++] = preSums[p2++];
         }
-        // 对区间 [l, r] 内的前缀和按升序排序
-        int len = r - l + 1;
-        // p1 ∈ [l, m], p2 ∈ [m+1, r]
-        int p1 = l, p2 = m + 1;
-        long[] sorted = new long[len];
-        for (int k = 0; k < len; k++) {
-            if (p1 > m) sorted[k] = preSums[p2++];
-            else if (p2 > r) sorted[k] = preSums[p1++];
-            else sorted[k] = preSums[p1] < preSums[p2] ? preSums[p1++] : preSums[p2++];
-        }
-        System.arraycopy(sorted, 0, preSums, l, len);
+        System.arraycopy(sorted, 0, preSums, l, sorted.length);
         return count;
     }
 
