@@ -21,6 +21,8 @@ public class N673 {
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) dp[i] = dp[i].update(dp[j]);
             }
+        }
+        for (int i = 0; i < n; i++) {
             LIS = LIS.compare(dp[i]);
         }
         return LIS.num;
