@@ -19,11 +19,11 @@ public class N673 {
         for (int i = 0; i < n; i++) {
             dp[i] = new State(1, 1);
             for (int j = 0; j < i; j++) {
-                if (nums[j] < nums[i]) dp[i] = dp[i].update(dp[j]);
+                if (nums[j] < nums[i]) dp[i] = dp[i].transfer(dp[j]);
             }
         }
         for (int i = 0; i < n; i++) {
-            LIS = LIS.compare(dp[i]);
+            LIS = LIS.update(dp[i]);
         }
         return LIS.num;
     }
@@ -49,7 +49,7 @@ public class N673 {
          * @param state 历史状态
          * @return 当前状态
          */
-        public State update(State state) {
+        public State transfer(State state) {
             int newLen = state.len + 1;
             if (len < newLen) {
                 len = newLen;
@@ -66,7 +66,7 @@ public class N673 {
          * @param state 状态
          * @return LIS 状态
          */
-        public State compare(State state) {
+        public State update(State state) {
             if (len < state.len) return state;
             if (len == state.len) num += state.num;
             return this;
