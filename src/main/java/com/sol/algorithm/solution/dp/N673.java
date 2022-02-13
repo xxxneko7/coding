@@ -14,10 +14,10 @@ public class N673 {
      */
     public int findNumberOfLIS(int[] nums) {
         int n = nums.length;
-        Status[] dp = new Status[n];
-        Status LIS = new Status(0, 0);
+        State[] dp = new State[n];
+        State LIS = new State(0, 0);
         for (int i = 0; i < n; i++) {
-            dp[i] = new Status(1, 1);
+            dp[i] = new State(1, 1);
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) dp[i] = dp[i].update(dp[j]);
             }
@@ -28,7 +28,7 @@ public class N673 {
         return LIS.num;
     }
 
-    class Status {
+    class State {
         /**
          * LIS 长度
          */
@@ -38,7 +38,7 @@ public class N673 {
          */
         int num;
 
-        Status(int maxLen, int num) {
+        State(int maxLen, int num) {
             this.len = maxLen;
             this.num = num;
         }
@@ -46,16 +46,16 @@ public class N673 {
         /**
          * 状态更新
          *
-         * @param status 历史状态
+         * @param state 历史状态
          * @return 当前状态
          */
-        public Status update(Status status) {
-            int newLen = status.len + 1;
+        public State update(State state) {
+            int newLen = state.len + 1;
             if (len < newLen) {
                 len = newLen;
-                num = status.num;
+                num = state.num;
             } else if (len == newLen) {
-                num += status.num;
+                num += state.num;
             }
             return this;
         }
@@ -63,12 +63,12 @@ public class N673 {
         /**
          * 状态比较
          *
-         * @param status 状态
+         * @param state 状态
          * @return LIS 状态
          */
-        public Status compare(Status status) {
-            if (len < status.len) return status;
-            if (len == status.len) num += status.num;
+        public State compare(State state) {
+            if (len < state.len) return state;
+            if (len == state.len) num += state.num;
             return this;
         }
     }
