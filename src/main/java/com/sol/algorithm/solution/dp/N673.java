@@ -5,7 +5,7 @@ package com.sol.algorithm.solution.dp;
  */
 public class N673 {
     /**
-     * 时间复杂度：O(n^2) <br>
+     * 时间复杂度：O(n!) <br>
      * 空间复杂度：O(n) <br>
      *
      * @param nums 无序数组
