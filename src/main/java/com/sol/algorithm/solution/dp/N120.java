@@ -13,7 +13,7 @@ public class N120 {
      * <p>
      * n 为三角形的层数 <br>
      * 时间复杂度：O(n!) <br>
-     * 空间复杂度：O(1) <br>
+     * 空间复杂度：O(n) <br>
      *
      * @param triangle 三角形
      * @return 最小路径和
