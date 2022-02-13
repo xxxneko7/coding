@@ -44,7 +44,7 @@ public class N673 {
         }
 
         /**
-         * 状态更新
+         * 状态转移
          *
          * @param state 历史状态
          * @return 当前状态
@@ -61,7 +61,7 @@ public class N673 {
         }
 
         /**
-         * 状态比较
+         * LIS 状态更新
          *
          * @param state 状态
          * @return LIS 状态
