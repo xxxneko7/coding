@@ -1,6 +1,11 @@
 # 算法训练营
 
 ### 作业
+#### 第7周
+- [45. 跳跃游戏II][LC45]
+- [55. 跳跃游戏][LC55]
+- [279. 完全平方数][LC279]
+
 #### 第6周
 - [70. 爬楼梯][LC70]
 - [120. 三角形最小路径和][LC120]
@@ -42,6 +47,9 @@
 [LC70]:dp/N70.java
 [LC120]:dp/N120.java
 [LC673]:dp/N673.java
+[LC45]:dp/N45.java
+[LC55]:dp/N55.java
+[LC279]:dp/N279.java
 
 [LC74]: binarySearch/N74.java
 [LC154]: binarySearch/N154.java
