@@ -15,13 +15,13 @@ public class N673 {
     public int findNumberOfLIS(int[] nums) {
         int n = nums.length;
         State[] dp = new State[n];
-        State LIS = new State(0, 0);
         for (int i = 0; i < n; i++) {
             dp[i] = new State(1, 1);
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) dp[i] = dp[i].transfer(dp[j]);
             }
         }
+        State LIS = new State(0, 0);
         for (int i = 0; i < n; i++) {
             LIS = LIS.update(dp[i]);
         }
