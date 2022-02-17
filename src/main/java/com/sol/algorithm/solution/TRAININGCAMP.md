@@ -5,6 +5,8 @@
 - [45. 跳跃游戏II][LC45]
 - [55. 跳跃游戏][LC55]
 - [279. 完全平方数][LC279]
+- [516. 最长回文子序列][LC516]
+- [124. 二叉树中的最大路径和][LC124]
 
 #### 第6周
 - [70. 爬楼梯][LC70]
@@ -50,6 +52,8 @@
 [LC45]:dp/N45.java
 [LC55]:dp/N55.java
 [LC279]:dp/N279.java
+[LC516]:dp/N516.java
+[LC124]:dp/N124.java
 
 [LC74]: binarySearch/N74.java
 [LC154]: binarySearch/N154.java
