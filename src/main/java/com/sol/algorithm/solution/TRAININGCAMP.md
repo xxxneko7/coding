@@ -1,6 +1,10 @@
 # 算法训练营
 
 ### 作业
+#### 第8周
+- [200. 岛屿数量][LC200]
+- [684. 冗余连接][LC684]
+
 #### 第7周
 - [45. 跳跃游戏II][LC45]
 - [55. 跳跃游戏][LC55]
@@ -65,6 +69,8 @@
 [LC130]: dfs/N130.java
 [LC355]: dfs/Twitter.java
 [LC538]: dfs/N538.java
+[LC200]: dfs/N200.java
+[LC684]: dfs/N684.java
 
 [LC21]: linkedList/N21.java
 [LC141]: linkedList/N141.java
