@@ -25,43 +25,42 @@ public class N684 {
     public int[] findRedundantConnection(int[][] edges) {
         int n = edges.length;
         parent = new int[n + 1];
-        for (int i = 0; i <= n; i++) {
-            parent[i] = i;
-        }
+        for (int i = 0; i <= n; i++) parent[i] = i;
+
         for (int[] edge : edges) {
-            if (!merge(edge[0], edge[1])) return edge;
+            if (!unionSet(edge[0], edge[1])) return edge;
         }
         return null;
     }
 
     /**
-     * 查找结点 i 的根结点，并将结点 i 的父节点设为根节点
+     * 查找元素 x 所在集合的代表元素
      *
-     * @param i 结点
-     * @return 根节点
+     * @param x 元素
+     * @return 代表元素
      */
-    private int find(int i) {
-        parent[i] = parent[i] == i ? i : find(parent[i]);
-        return parent[i];
+    private int find(int x) {
+        parent[x] = parent[x] == x ? x : find(parent[x]);
+        return parent[x];
     }
 
     /**
-     * 合并结点 x, y，如果合并后存在环则返回 false
+     * 合并集合
      *
-     * @param x 结点
-     * @param y 结点
+     * @param x 元素
+     * @param y 元素
      * @return 是否可以合并
      */
-    private boolean merge(int x, int y) {
-        int rx = find(x);
-        int ry = find(y);
-        if (rx == ry) return false;
-        parent[rx] = ry;
+    private boolean unionSet(int x, int y) {
+        x = find(x);
+        y = find(y);
+        if (x == y) return false;
+        parent[x] = y;
         return true;
     }
 
     /**
-     * parent[i] 为结点 i 的父节点
+     * parent[i] 为结点 i 的父结点
      */
     int[] parent;
 }

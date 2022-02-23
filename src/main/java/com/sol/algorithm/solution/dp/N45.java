@@ -21,7 +21,7 @@ public class N45 {
     static class DP implements Solution {
 
         /**
-         * 时间复杂度：O(n!) <br>
+         * 时间复杂度：O(n^2) <br>
          * 空间复杂度：O(n) <br>
          */
         @Override

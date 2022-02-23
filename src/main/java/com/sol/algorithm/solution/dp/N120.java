@@ -12,7 +12,7 @@ public class N120 {
      * 对于当前位置 cur，每次只能选择下一层的 cur 或 cur + 1
      * <p>
      * n 为三角形的层数 <br>
-     * 时间复杂度：O(n!) <br>
+     * 时间复杂度：O(n^2) <br>
      * 空间复杂度：O(n) <br>
      *
      * @param triangle 三角形

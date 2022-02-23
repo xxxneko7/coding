@@ -6,9 +6,9 @@ package com.sol.algorithm.solution.dfs;
 public class N200 {
     public static void main(String[] args) {
         char[][] grid = {
-                {'1', '0', '1'},
-                {'1', '1', '1'},
-                {'1', '0', '1'},
+            {'1', '0', '1'},
+            {'1', '1', '1'},
+            {'1', '0', '1'},
         };
         System.out.println(new DisjointSet().numIslands(grid));
     }
@@ -33,43 +33,62 @@ public class N200 {
             this.n = grid.length;
             this.m = grid[0].length;
             int len = n * m;
-            fa = new int[len];
-            for (int i = 0; i < len; i++) fa[i] = i;
+            parent = new int[len];
+            for (int i = 0; i < len; i++) parent[i] = i;
 
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
                     if (grid[i][j] == '0') {
-                        fa[num(i, j)] = -1;
+                        parent[index(i, j)] = -1;
                         continue;
                     }
                     for (int k = 0; k < 2; k++) {
                         int ni = i + dx[k];
                         int nj = j + dy[k];
                         if (ni >= n || nj >= m || grid[ni][nj] == '0') continue;
-                        unionSet(num(i, j), num(ni, nj));
+                        unionSet(index(i, j), index(ni, nj));
                     }
                 }
             }
             int numOfIslands = 0;
             for (int i = 0; i < len; i++) {
-                if (fa[i] != -1 && find(i) == i) numOfIslands++;
+                if (parent[i] != -1 && find(i) == i) numOfIslands++;
             }
             return numOfIslands;
         }
 
-        private int num(int i, int j) {
+        /**
+         * 将二维坐标转换为一维下标
+         *
+         * @param i 纵坐标
+         * @param j 横坐标
+         * @return 下标
+         */
+        private int index(int i, int j) {
             return i * m + j;
         }
 
+        /**
+         * 查找元素 x 所在集合的代表元素
+         *
+         * @param x 元素
+         * @return 代表元素
+         */
         private int find(int x) {
-            if (fa[x] == x) return x;
-            return fa[x] = find(fa[x]);
+            if (parent[x] == x) return x;
+            return parent[x] = find(parent[x]);
         }
 
+        /**
+         * 合并集合
+         *
+         * @param x 元素
+         * @param y 元素
+         */
         private void unionSet(int x, int y) {
             x = find(x);
             y = find(y);
-            if (x != y) fa[x] = y;
+            if (x != y) parent[x] = y;
         }
 
         /**
@@ -78,9 +97,9 @@ public class N200 {
         private int n, m;
 
         /**
-         * 父结点
+         * parent[i] 为结点 i 的父结点
          */
-        private int[] fa;
+        private int[] parent;
 
         /**
          * 方向数组
