@@ -13,7 +13,7 @@ public class N1091 {
         // int[][] grid = {{1, 0, 0}, {1, 1, 0}, {1, 1, 0}};
         // 2
         int[][] grid = {{0, 1}, {1, 0}};
-        Solution solution = new BFS();
+        Solution solution = new BiBFS();
         System.out.println(solution.shortestPathBinaryMatrix(grid));
     }
 
@@ -155,32 +155,78 @@ public class N1091 {
             int init = init(grid);
             if (init != 0) return init;
 
-            Queue<Integer[]> forwardQueue = new LinkedList<>();
+            forwardQueue = new LinkedList<>();
             forwardQueue.offer(start);
-            // 添加空对象作为连续两层之间的隔断
-            forwardQueue.offer(null);
-            int depth = 1;
+            forwardIdxToDepth = new HashMap<>();
+            forwardIdxToDepth.put(index(start), 1);
 
-            while (!forwardQueue.isEmpty()) {
-                Integer[] pos = forwardQueue.poll();
-                if (pos == null) {
-                    // 下一层为空时退出
-                    if (forwardQueue.peek() == null) break;
-                    // 不为空时深度加 1，并添加新的隔断
-                    depth++;
-                    forwardQueue.offer(null);
-                    continue;
-                }
-                if (grid[pos[0]][pos[1]] == 1) continue;
-                if (pos[0].equals(target[0]) && pos[1].equals(target[1])) return depth;
-                grid[pos[0]][pos[1]] = 1;
-                for (int i = 0; i < dx.length; i++) {
-                    Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
-                    forwardQueue.offer(next);
-                }
+            reverseQueue = new LinkedList<>();
+            reverseQueue.offer(target);
+            reverseIdxToDepth = new HashMap<>();
+            reverseIdxToDepth.put(index(target), 1);
+
+            while (!forwardQueue.isEmpty() && !reverseQueue.isEmpty()) {
+                int res = expend(forwardQueue, forwardIdxToDepth, reverseIdxToDepth);
+                if (res != -1) return res;
+                res = expend(reverseQueue, reverseIdxToDepth, forwardIdxToDepth);
+                if (res != -1) return res;
             }
-
             return -1;
         }
+
+        /**
+         * 沿当前方向进行一次扩展
+         *
+         * @param queue           当前方向的队列
+         * @param idxToDepth      当前方向的索引到深度的映射
+         * @param otherIdxToDepth 另一方向的索引到深度的映射
+         * @return 双向搜索相遇时返回总的深度，否则返回 -1
+         */
+        int expend(Queue<Integer[]> queue, Map<Integer, Integer> idxToDepth, Map<Integer, Integer> otherIdxToDepth) {
+            Integer[] pos = queue.poll();
+            int idxOfPos = index(pos);
+            for (int i = 0; i < dx.length; i++) {
+                Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
+                int idxOfNext = index(next);
+                // 下一个位置为 1 时跳过
+                if (grid[next[0]][next[1]] == 1) continue;
+                // 下一个位置在 当前方向 已经访问过时跳过
+                if (idxToDepth.containsKey(idxOfNext)) continue;
+                // 双向搜索相遇
+                if (otherIdxToDepth.containsKey(idxOfNext))
+                    return idxToDepth.get(idxOfPos) + otherIdxToDepth.get(idxOfNext);
+
+                idxToDepth.put(idxOfPos, idxToDepth.get(idxOfPos) + 1);
+                queue.offer(next);
+            }
+            return -1;
+        }
+
+        /**
+         * 坐标转索引
+         *
+         * @param pos 坐标
+         * @return 索引
+         */
+        int index(Integer[] pos) {
+            return pos[0] * n + pos[1];
+        }
+
+        /**
+         * 正向队列
+         */
+        Queue<Integer[]> forwardQueue;
+        /**
+         * 反向队列
+         */
+        Queue<Integer[]> reverseQueue;
+        /**
+         * 正向映射
+         */
+        Map<Integer, Integer> forwardIdxToDepth;
+        /**
+         * 反向映射
+         */
+        Map<Integer, Integer> reverseIdxToDepth;
     }
 }
