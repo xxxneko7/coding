@@ -13,7 +13,7 @@ public class N1091 {
         // int[][] grid = {{1, 0, 0}, {1, 1, 0}, {1, 1, 0}};
         // 2
         int[][] grid = {{0, 1}, {1, 0}};
-        Solution solution = new BiBFS();
+        Solution solution = new BFS();
         System.out.println(solution.shortestPathBinaryMatrix(grid));
     }
 
@@ -39,8 +39,7 @@ public class N1091 {
             if (grid[n - 1][n - 1] == 1) return -1;
             if (n == 1) return 1;
 
-            grid = extendGrid(grid);
-            this.grid = grid;
+            this.extendedGrid = extendGrid(grid);
             this.start = new Integer[]{1, 1};
             this.target = new Integer[]{n, n};
             return 0;
@@ -72,7 +71,7 @@ public class N1091 {
         /**
          * 二进制矩阵
          */
-        int[][] grid;
+        int[][] extendedGrid;
         /**
          * 起始位置
          */
@@ -127,11 +126,11 @@ public class N1091 {
                     queue.offer(null);
                     continue;
                 }
-                if (grid[pos[0]][pos[1]] == 1) continue;
-                if (pos[0].equals(target[0]) && pos[1].equals(target[1])) return depth;
                 grid[pos[0]][pos[1]] = 1;
                 for (int i = 0; i < dx.length; i++) {
                     Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
+                    if (grid[next[0]][next[1]] == 1) continue;
+                    if (next[0].equals(target[0]) && next[1].equals(target[1])) return depth + 1;
                     queue.offer(next);
                 }
             }
@@ -189,7 +188,7 @@ public class N1091 {
                 Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
                 int idxOfNext = index(next);
                 // 下一个位置为 1 时跳过
-                if (grid[next[0]][next[1]] == 1) continue;
+                if (extendedGrid[next[0]][next[1]] == 1) continue;
                 // 下一个位置在 当前方向 已经访问过时跳过
                 if (idxToDepth.containsKey(idxOfNext)) continue;
                 // 双向搜索相遇
@@ -228,5 +227,75 @@ public class N1091 {
          * 反向映射
          */
         Map<Integer, Integer> reverseIdxToDepth;
+    }
+
+    /**
+     * A* 搜索
+     */
+    public static class Astar extends Solution {
+
+        @Override
+        int shortestPathBinaryMatrix(int[][] grid) {
+            int init = init(grid);
+            if (init != 0) return init;
+
+            queue = new PriorityQueue<>(Comparator.comparingInt(this::expect));
+            queue.offer(start);
+            idxToDepth = new HashMap<>();
+            idxToDepth.put(index(start), 1);
+
+            int idxOfTarget = index(target);
+
+            while (!queue.isEmpty()) {
+                Integer[] pos = queue.poll();
+                int idxOfPos = index(pos);
+                for (int i = 0; i < dx.length; i++) {
+                    Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
+                    // 下一个位置为 1 时跳过
+                    if (extendedGrid[next[0]][next[1]] == 1) continue;
+                    int idxOfNext = index(next);
+                    // 下一个位置在 当前方向 已经访问过时跳过
+                    if (idxToDepth.containsKey(idxOfNext)) continue;
+                    // 下一个位置即目标
+                    if (idxOfNext == idxOfTarget) return idxToDepth.get(idxOfPos) + 1;
+
+                    idxToDepth.put(idxOfPos, idxToDepth.get(idxOfPos) + 1);
+                    queue.offer(next);
+                }
+            }
+
+            return -1;
+        }
+
+        /**
+         * 期望函数：
+         * pos 到 target 的曼哈顿距离 + pos 的深度
+         *
+         * @param pos 位置
+         * @return 期望值，期望值越小优先级越高
+         */
+        int expect(Integer[] pos) {
+            return target[0] - pos[0] + target[1] - pos[1] + idxToDepth.get(index(pos));
+        }
+
+        /**
+         * 坐标转索引
+         *
+         * @param pos 坐标
+         * @return 索引
+         */
+        int index(Integer[] pos) {
+            return pos[0] * n + pos[1];
+        }
+
+        /**
+         * 期望值最小的优先队列
+         */
+        PriorityQueue<Integer[]> queue;
+
+        /**
+         * 位置索引 -> 深度
+         */
+        Map<Integer, Integer> idxToDepth;
     }
 }
