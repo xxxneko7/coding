@@ -99,7 +99,7 @@ public class N1091 {
         /**
          * n 为 grid 的长宽
          * <li> 时间复杂度：O(n^2) </li>
-         * <li> 空间复杂度：O(n) </li>
+         * <li> 空间复杂度：O(n^2) </li>
          */
         @Override
         public int shortestPathBinaryMatrix(int[][] grid) {
@@ -146,8 +146,8 @@ public class N1091 {
 
         /**
          * n 为 grid 的长宽
-         * <li> 时间复杂度：O(n * log(n)) </li>
-         * <li> 空间复杂度：O(n) </li>
+         * <li> 时间复杂度：O(n^2) </li>
+         * <li> 空间复杂度：O(n^2) </li>
          */
         @Override
         public int shortestPathBinaryMatrix(int[][] grid) {
@@ -234,6 +234,11 @@ public class N1091 {
      */
     public static class Astar extends Solution {
 
+        /**
+         * n 为 grid 的长宽
+         * <li> 时间复杂度：O(n^2) </li>
+         * <li> 空间复杂度：O(n^2) </li>
+         */
         @Override
         int shortestPathBinaryMatrix(int[][] grid) {
             int init = init(grid);
