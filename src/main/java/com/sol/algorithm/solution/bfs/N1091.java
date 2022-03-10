@@ -12,8 +12,10 @@ public class N1091 {
         // -1
         // int[][] grid = {{1, 0, 0}, {1, 1, 0}, {1, 1, 0}};
         // 2
-        int[][] grid = {{0, 1}, {1, 0}};
-        Solution solution = new BFS();
+        // int[][] grid = {{0, 1}, {1, 0}};
+        // 4
+        int[][] grid = {{0, 0, 0, 0}, {1, 0, 0, 1}, {0, 1, 0, 0}, {0, 0, 0, 0}};
+        Solution solution = new BiBFS();
         System.out.println(solution.shortestPathBinaryMatrix(grid));
     }
 
@@ -35,51 +37,22 @@ public class N1091 {
          */
         int init(int[][] grid) {
             this.n = grid.length;
-            if (grid[0][0] == 1) return -1;
-            if (grid[n - 1][n - 1] == 1) return -1;
+            if (grid[0][0] == 1 || grid[n - 1][n - 1] == 1) return -1;
             if (n == 1) return 1;
 
-            this.extendedGrid = extendGrid(grid);
-            this.start = new Integer[]{1, 1};
-            this.target = new Integer[]{n, n};
+            this.start = new int[]{0, 0};
+            this.target = new int[]{n - 1, n - 1};
             return 0;
         }
 
         /**
-         * 扩展 grid，使得原矩阵被 1 包裹
-         *
-         * @param grid 二进制矩阵
-         * @return 扩展后的新矩阵
-         */
-        int[][] extendGrid(int[][] grid) {
-            int[][] temp = new int[n + 2][n + 2];
-            for (int i = 0; i <= n + 1; i++) {
-                temp[0][i] = 1;
-                temp[n + 1][i] = 1;
-                temp[i][0] = 1;
-                temp[i][n + 1] = 1;
-            }
-
-            for (int i = 0; i < n; i++) {
-                System.arraycopy(grid[i], 0, temp[i + 1], 1, n);
-            }
-
-            return temp;
-        }
-
-
-        /**
-         * 二进制矩阵
-         */
-        int[][] extendedGrid;
-        /**
          * 起始位置
          */
-        Integer[] start;
+        int[] start;
         /**
          * 目标位置
          */
-        Integer[] target;
+        int[] target;
         /**
          * grid 的长宽
          */
@@ -106,33 +79,24 @@ public class N1091 {
             int init = init(grid);
             if (init != 0) return init;
 
-            grid = extendGrid(grid);
-
-            Integer[] start = new Integer[]{1, 1};
-            Integer[] target = new Integer[]{n, n};
-            Queue<Integer[]> queue = new LinkedList<>();
+            Queue<int[]> queue = new LinkedList<>();
             queue.offer(start);
-            // 添加空对象作为连续两层之间的隔断
-            queue.offer(null);
             int depth = 1;
 
             while (!queue.isEmpty()) {
-                Integer[] pos = queue.poll();
-                if (pos == null) {
-                    // 下一层为空时退出
-                    if (queue.peek() == null) break;
-                    // 不为空时深度加 1，并添加新的隔断
-                    depth++;
-                    queue.offer(null);
-                    continue;
+                int size = queue.size();
+                while (size-- > 0) {
+                    int[] pos = queue.poll();
+                    grid[pos[0]][pos[1]] = 1;
+                    for (int i = 0; i < dx.length; i++) {
+                        int nx = pos[0] + dx[i];
+                        int ny = pos[1] + dy[i];
+                        if (nx < 0 || nx >= n || ny < 0 || ny >= n || grid[nx][ny] == 1) continue;
+                        if (nx == target[0] && ny == target[1]) return depth + 1;
+                        queue.offer(new int[]{nx, ny});
+                    }
                 }
-                grid[pos[0]][pos[1]] = 1;
-                for (int i = 0; i < dx.length; i++) {
-                    Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
-                    if (grid[next[0]][next[1]] == 1) continue;
-                    if (next[0].equals(target[0]) && next[1].equals(target[1])) return depth + 1;
-                    queue.offer(next);
-                }
+                depth++;
             }
 
             return -1;
@@ -153,6 +117,7 @@ public class N1091 {
         public int shortestPathBinaryMatrix(int[][] grid) {
             int init = init(grid);
             if (init != 0) return init;
+            this.grid = grid;
 
             forwardQueue = new LinkedList<>();
             forwardQueue.offer(start);
@@ -165,10 +130,17 @@ public class N1091 {
             reverseIdxToDepth.put(index(target), 1);
 
             while (!forwardQueue.isEmpty() && !reverseQueue.isEmpty()) {
-                int res = expend(forwardQueue, forwardIdxToDepth, reverseIdxToDepth);
-                if (res != -1) return res;
-                res = expend(reverseQueue, reverseIdxToDepth, forwardIdxToDepth);
-                if (res != -1) return res;
+                int res, size;
+                size = forwardQueue.size();
+                while (size-- > 0) {
+                    res = expend(forwardQueue, forwardIdxToDepth, reverseIdxToDepth);
+                    if (res != -1) return res;
+                }
+                size = reverseQueue.size();
+                while (size-- > 0) {
+                    res = expend(reverseQueue, reverseIdxToDepth, forwardIdxToDepth);
+                    if (res != -1) return res;
+                }
             }
             return -1;
         }
@@ -181,21 +153,24 @@ public class N1091 {
          * @param otherIdxToDepth 另一方向的索引到深度的映射
          * @return 双向搜索相遇时返回总的深度，否则返回 -1
          */
-        int expend(Queue<Integer[]> queue, Map<Integer, Integer> idxToDepth, Map<Integer, Integer> otherIdxToDepth) {
-            Integer[] pos = queue.poll();
+        int expend(Queue<int[]> queue, Map<Integer, Integer> idxToDepth, Map<Integer, Integer> otherIdxToDepth) {
+            int[] pos = queue.poll();
             int idxOfPos = index(pos);
             for (int i = 0; i < dx.length; i++) {
-                Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
+                int nx = pos[0] + dx[i];
+                int ny = pos[1] + dy[i];
+                // 下一个位置为 1 或 越界时跳过
+                if (nx < 0 || nx >= n || ny < 0 || ny >= n || grid[nx][ny] == 1) continue;
+
+                int[] next = new int[]{nx, ny};
                 int idxOfNext = index(next);
-                // 下一个位置为 1 时跳过
-                if (extendedGrid[next[0]][next[1]] == 1) continue;
                 // 下一个位置在 当前方向 已经访问过时跳过
                 if (idxToDepth.containsKey(idxOfNext)) continue;
                 // 双向搜索相遇
                 if (otherIdxToDepth.containsKey(idxOfNext))
                     return idxToDepth.get(idxOfPos) + otherIdxToDepth.get(idxOfNext);
 
-                idxToDepth.put(idxOfPos, idxToDepth.get(idxOfPos) + 1);
+                idxToDepth.put(idxOfNext, idxToDepth.get(idxOfPos) + 1);
                 queue.offer(next);
             }
             return -1;
@@ -207,18 +182,22 @@ public class N1091 {
          * @param pos 坐标
          * @return 索引
          */
-        int index(Integer[] pos) {
+        int index(int[] pos) {
             return pos[0] * n + pos[1];
         }
 
         /**
+         * 二进制矩阵
+         */
+        int[][] grid;
+        /**
          * 正向队列
          */
-        Queue<Integer[]> forwardQueue;
+        Queue<int[]> forwardQueue;
         /**
          * 反向队列
          */
-        Queue<Integer[]> reverseQueue;
+        Queue<int[]> reverseQueue;
         /**
          * 正向映射
          */
@@ -252,19 +231,22 @@ public class N1091 {
             int idxOfTarget = index(target);
 
             while (!queue.isEmpty()) {
-                Integer[] pos = queue.poll();
+                int[] pos = queue.poll();
                 int idxOfPos = index(pos);
                 for (int i = 0; i < dx.length; i++) {
-                    Integer[] next = new Integer[]{pos[0] + dx[i], pos[1] + dy[i]};
-                    // 下一个位置为 1 时跳过
-                    if (extendedGrid[next[0]][next[1]] == 1) continue;
+                    int nx = pos[0] + dx[i];
+                    int ny = pos[1] + dy[i];
+                    // 下一个位置为 1 或 越界时跳过
+                    if (nx < 0 || nx >= n || ny < 0 || ny >= n || grid[nx][ny] == 1) continue;
+
+                    int[] next = new int[]{nx, ny};
                     int idxOfNext = index(next);
-                    // 下一个位置在 当前方向 已经访问过时跳过
+                    // 下一个位置在已经访问过时跳过
                     if (idxToDepth.containsKey(idxOfNext)) continue;
                     // 下一个位置即目标
                     if (idxOfNext == idxOfTarget) return idxToDepth.get(idxOfPos) + 1;
 
-                    idxToDepth.put(idxOfPos, idxToDepth.get(idxOfPos) + 1);
+                    idxToDepth.put(idxOfNext, idxToDepth.get(idxOfPos) + 1);
                     queue.offer(next);
                 }
             }
@@ -279,7 +261,7 @@ public class N1091 {
          * @param pos 位置
          * @return 期望值，期望值越小优先级越高
          */
-        int expect(Integer[] pos) {
+        int expect(int[] pos) {
             return target[0] - pos[0] + target[1] - pos[1] + idxToDepth.get(index(pos));
         }
 
@@ -289,14 +271,14 @@ public class N1091 {
          * @param pos 坐标
          * @return 索引
          */
-        int index(Integer[] pos) {
+        int index(int[] pos) {
             return pos[0] * n + pos[1];
         }
 
         /**
          * 期望值最小的优先队列
          */
-        PriorityQueue<Integer[]> queue;
+        PriorityQueue<int[]> queue;
 
         /**
          * 位置索引 -> 深度
