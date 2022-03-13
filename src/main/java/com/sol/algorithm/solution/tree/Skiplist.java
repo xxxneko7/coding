@@ -1,0 +1,23 @@
+package com.sol.algorithm.solution.tree;
+
+/**
+ * 1206. 设计跳表
+ */
+class Skiplist {
+
+    public Skiplist() {
+
+    }
+
+    public boolean search(int target) {
+
+    }
+
+    public void add(int num) {
+
+    }
+
+    public boolean erase(int num) {
+
+    }
+}
