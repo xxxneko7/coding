@@ -10,7 +10,7 @@ class Skiplist {
     }
 
     public boolean search(int target) {
-
+        return false;
     }
 
     public void add(int num) {
@@ -18,6 +18,6 @@ class Skiplist {
     }
 
     public boolean erase(int num) {
-
+        return false;
     }
 }
