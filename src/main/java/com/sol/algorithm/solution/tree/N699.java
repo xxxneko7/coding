@@ -1,7 +1,6 @@
 package com.sol.algorithm.solution.tree;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.List;
 
 /**
  * 699. 掉落的方块
@@ -18,8 +17,12 @@ public class N699 {
      * @return 堆叠高度列表
      */
     public List<Integer> fallingSquares(int[][] positions) {
+        return null;
     }
 
+    /**
+     * 线段树
+     */
     class SegmentTree {
         int N, H;
         int[] tree, lazy;
