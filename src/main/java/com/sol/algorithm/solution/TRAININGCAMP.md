@@ -3,7 +3,7 @@
 ### 作业
 #### 第10周
 - [239. 滑动窗口最大值][LC239]
-- [1206. 设计跳表][LC2106]
+- [1206. 设计跳表][Skiplist]
 
 #### 第9周
 ##### 基础问题
@@ -159,3 +159,6 @@
 [LC150]: stack/N150.java
 [LC155]: stack/N155.java
 [LC227]: stack/N227.java
+
+[LC239]: tree/N239.java
+[Skiplist]: tree/Skiplist.java
