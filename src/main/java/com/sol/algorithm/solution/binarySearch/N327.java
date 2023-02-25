@@ -1,7 +1,5 @@
 package com.sol.algorithm.solution.binarySearch;
 
-import java.util.Arrays;
-
 /**
  * 327. 区间和的个数
  */

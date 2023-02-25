@@ -1,14 +1,17 @@
 package com.sol.algorithm.solution.stack;
 
 
-import java.util.Stack;
+import sun.security.util.ArrayUtil;
 
-public class N150  {
+import java.util.*;
+import java.util.function.BiFunction;
+
+public class N150 {
     public int evalRPN(String[] tokens) {
         Stack<Integer> numbers = new Stack<>();
         for (String token : tokens) {
-            if ("+".equals(token) || "-".equals(token) || "*".equals(token) || "/".equals(token)) {
-                numbers.push(calc(numbers.pop(), numbers.pop(), token));
+            if (ops.containsKey(token)) {
+                numbers.push(ops.get(token).apply(numbers.pop(), numbers.pop()));
             } else {
                 numbers.push(Integer.parseInt(token));
             }
@@ -16,11 +19,10 @@ public class N150  {
         return numbers.peek();
     }
 
-    private int calc(int y, int x, String op) {
-        if ("+".equals(op)) return x + y;
-        if ("-".equals(op)) return x - y;
-        if ("*".equals(op)) return x * y;
-        if ("/".equals(op)) return x / y;
-        return 0;
-    }
+    private Map<String, BiFunction<Integer, Integer, Integer>> ops = new HashMap<String, BiFunction<Integer, Integer, Integer>>() {{
+        put("+", (x, y) -> y + x);
+        put("-", (x, y) -> y - x);
+        put("*", (x, y) -> y * x);
+        put("/", (x, y) -> y / x);
+    }};
 }

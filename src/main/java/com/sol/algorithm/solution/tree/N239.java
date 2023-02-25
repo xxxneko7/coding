@@ -1,9 +1,6 @@
 package com.sol.algorithm.solution.tree;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * 239. 滑动窗口最大值
@@ -21,6 +18,18 @@ public class N239 {
      * @return 滑动窗口中的最大值
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
+        int[] ans = new int[nums.length - k + 1];
+        Deque<Integer> indexes = new LinkedList<>();
+        for (int i = 0; i < nums.length; i++) {
+            while (!indexes.isEmpty() && indexes.getFirst() <= i - k) indexes.removeFirst();
+            while (!indexes.isEmpty() && nums[indexes.getLast()] <= nums[i]) indexes.removeLast();
+            indexes.addLast(i);
+            if (i >= k - 1) ans[i - (k - 1)] = nums[indexes.getFirst()];
+        }
+        return ans;
+    }
+
+    /*public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
 
         SortedMap<Integer, Integer> numToCount = new TreeMap<>(Comparator.reverseOrder());
@@ -45,5 +54,5 @@ public class N239 {
         }
 
         return ans;
-    }
+    }*/
 }

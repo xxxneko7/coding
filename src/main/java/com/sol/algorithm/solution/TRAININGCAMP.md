@@ -1,6 +1,11 @@
 # 算法训练营
 
 ### 作业
+#### 第10周
+- [239. 滑动窗口最大值][LC239]
+- [136. 邻值查找][AC136]
+- [327. 区间和的个数][LC327]
+
 #### 第9周
 ##### 基础问题
 - [709. 转换成小写字母][LC709]
@@ -155,3 +160,7 @@
 [LC150]: stack/N150.java
 [LC155]: stack/N155.java
 [LC227]: stack/N227.java
+
+[LC239]: tree/N239.java
+[AC136]: tree/AC136.java
+[Skiplist]: tree/Skiplist.java
