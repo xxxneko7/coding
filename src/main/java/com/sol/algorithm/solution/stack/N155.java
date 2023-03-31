@@ -3,8 +3,15 @@ package com.sol.algorithm.solution.stack;
 
 import java.util.Stack;
 
-public class N155  {
-    class MinStack {
+public class N155 {
+    public static void main(String[] args) {
+        MinStack minStack = new MinStack();
+        minStack.push(-1);
+        minStack.top();
+        System.out.println(minStack.getMin());
+    }
+
+    static class MinStack {
         Stack<Integer> values;
         Stack<Integer> indexesOfMinVal;
 
@@ -30,7 +37,7 @@ public class N155  {
         }
 
         public int top() {
-            return values.pop();
+            return values.peek();
         }
 
         public int getMin() {

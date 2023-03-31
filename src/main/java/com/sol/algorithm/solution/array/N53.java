@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution;
+package com.sol.algorithm.solution.array;
 
 public class N53 {
     public int maxSubArray(int[] nums) {

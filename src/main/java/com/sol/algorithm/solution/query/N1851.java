@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution;
+package com.sol.algorithm.solution.query;
 
 import java.util.*;
 

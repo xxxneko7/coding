@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution;
+package com.sol.algorithm.solution.string;
 
 import java.util.Arrays;
 
