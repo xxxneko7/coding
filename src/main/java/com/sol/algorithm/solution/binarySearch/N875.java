@@ -13,7 +13,7 @@ public class N875 {
      *
      * @param piles 第 i 堆中有 piles[i] 根香蕉
      * @param h     时限
-     * @return 每小时吃掉香蕉的根数
+     * @return 每小时吃掉香蕉的最少根数
      */
     public int minEatingSpeed(int[] piles, int h) {
         this.piles = piles;
@@ -22,17 +22,17 @@ public class N875 {
         while (minSpeed < upper) {
             int speed = (minSpeed + upper) / 2;
             int time = calTime(speed);
-            if (time > h) {
-                minSpeed = speed + 1;
-            } else {
+            if (time <= h) {
                 upper = speed;
+            } else {
+                minSpeed = speed + 1;
             }
         }
         return minSpeed;
     }
 
     /**
-     * 计算吃完所有橡胶需要的时间
+     * 计算吃完所有香蕉需要的时间
      *
      * @param speed 每小时吃掉香蕉的根数
      * @return 时间（小时）

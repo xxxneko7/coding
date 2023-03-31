@@ -14,8 +14,15 @@ public class N1091 {
         // 2
         // int[][] grid = {{0, 1}, {1, 0}};
         // 4
-        int[][] grid = {{0, 0, 0, 0}, {1, 0, 0, 1}, {0, 1, 0, 0}, {0, 0, 0, 0}};
-        Solution solution = new BiBFS();
+        // int[][] grid = {{0, 0, 0, 0}, {1, 0, 0, 1}, {0, 1, 0, 0}, {0, 0, 0, 0}};
+        int[][] grid = {
+            {0, 1, 0, 0, 0, 0},
+            {0, 1, 1, 1, 1, 1},
+            {0, 0, 0, 0, 1, 1},
+            {0, 1, 0, 0, 0, 1},
+            {1, 0, 0, 1, 0, 1},
+            {0, 0, 1, 0, 1, 0}};
+        Solution solution = new Astar();
         System.out.println(solution.shortestPathBinaryMatrix(grid));
     }
 
@@ -210,6 +217,13 @@ public class N1091 {
 
     /**
      * A* 搜索
+     * t: 7
+     * [0,1,0,0,0,0]
+     * [0,1,1,1,1,1]
+     * [0,0,0,0,1,1]
+     * [0,1,0,0,0,1]
+     * [1,0,0,1,0,1]
+     * [0,0,1,0,1,0]
      */
     public static class Astar extends Solution {
 
@@ -241,7 +255,7 @@ public class N1091 {
 
                     int[] next = new int[]{nx, ny};
                     int idxOfNext = index(next);
-                    // 下一个位置在已经访问过时跳过
+                    // 下一个位置已经访问过时跳过
                     if (idxToDepth.containsKey(idxOfNext)) continue;
                     // 下一个位置即目标
                     if (idxOfNext == idxOfTarget) return idxToDepth.get(idxOfPos) + 1;
