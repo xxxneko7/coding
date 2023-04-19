@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.binarySearch;
+package com.sol.algorithm.solution.binarysearch;
 
 /**
  * 1011. 在 D 天内送达包裹的能力

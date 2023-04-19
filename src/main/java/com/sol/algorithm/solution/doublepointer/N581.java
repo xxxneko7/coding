@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.doublePointer;
+package com.sol.algorithm.solution.doublepointer;
 
 public class N581 {
     public static void main(String[] args) {

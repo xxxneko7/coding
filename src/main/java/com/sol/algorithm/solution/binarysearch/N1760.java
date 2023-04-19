@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.binarySearch;
+package com.sol.algorithm.solution.binarysearch;
 
 import java.util.Arrays;
 

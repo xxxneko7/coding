@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.linkedList;
+package com.sol.algorithm.solution.linkedlist;
 
 import java.util.ArrayList;
 import java.util.HashMap;

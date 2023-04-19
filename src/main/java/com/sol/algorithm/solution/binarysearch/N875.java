@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.binarySearch;
+package com.sol.algorithm.solution.binarysearch;
 
 /**
  * 875. 爱吃香蕉的珂珂

@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.binarySearch;
+package com.sol.algorithm.solution.binarysearch;
 
 public class N240 {
     public static void main(String[] args) {

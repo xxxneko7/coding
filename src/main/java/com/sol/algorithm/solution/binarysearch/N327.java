@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.binarySearch;
+package com.sol.algorithm.solution.binarysearch;
 
 /**
  * 327. 区间和的个数

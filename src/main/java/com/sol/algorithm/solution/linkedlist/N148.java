@@ -1,9 +1,7 @@
-package com.sol.algorithm.solution.linkedList;
+package com.sol.algorithm.solution.linkedlist;
 
 import com.sol.algorithm.structure.ListNode;
 import com.sol.algorithm.util.LinkedListUtil;
-
-import java.util.List;
 
 public class N148 {
     public static void main(String[] args) {

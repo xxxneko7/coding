@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.bitOp;
+package com.sol.algorithm.solution.bitop;
 
 import java.util.Arrays;
 

@@ -113,12 +113,12 @@
 [LC516]:dp/N516.java
 [LC124]:dp/N124.java
 
-[LC74]: binarySearch/N74.java
-[LC154]: binarySearch/N154.java
-[LC875]: binarySearch/N875.java
-[LC911]: binarySearch/N911.java
-[LC1011]: binarySearch/N1011.java
-[LC327]: binarySearch/N327.java
+[LC74]: binarysearch/N74.java
+[LC154]: binarysearch/N154.java
+[LC875]: binarysearch/N875.java
+[LC911]: binarysearch/N911.java
+[LC1011]: binarysearch/N1011.java
+[LC327]: binarysearch/N327.java
 
 [LC130]: dfs/N130.java
 [LC355]: dfs/Twitter.java
@@ -126,10 +126,10 @@
 [LC200]: dfs/N200.java
 [LC684]: dfs/N684.java
 
-[LC21]: linkedList/N21.java
-[LC141]: linkedList/N141.java
-[LC206]: linkedList/N206.java
-[LC23]: linkedList/N23.java
+[LC21]: linkedlist/N21.java
+[LC141]: linkedlist/N141.java
+[LC206]: linkedlist/N206.java
+[LC23]: linkedlist/N23.java
 
 [LC210]: bfs/N210.java
 [LC1091]: bfs/N1091.java

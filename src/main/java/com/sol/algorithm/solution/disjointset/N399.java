@@ -1,4 +1,4 @@
-package com.sol.algorithm.solution.disjointSet;
+package com.sol.algorithm.solution.disjointset;
 
 import java.util.Arrays;
 import java.util.HashMap;
