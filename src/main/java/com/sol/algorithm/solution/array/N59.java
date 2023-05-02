@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * <a href="https://leetcode.cn/problems/spiral-matrix-ii/">59. 螺旋矩阵 II</a>
+ */
 public class N59 {
     public static void main(String[] args) {
         int[][] matrix = new N59().generateMatrix(20);
@@ -13,7 +16,6 @@ public class N59 {
     }
 
     static List<int[]> directions = new ArrayList<>(4);
-    static int cursor = 0;
 
     static {
         directions.add(new int[]{0, 1});
@@ -22,7 +24,10 @@ public class N59 {
         directions.add(new int[]{-1, 0});
     }
 
+    int cursor;
+
     public int[][] generateMatrix(int n) {
+        this.cursor = 0;
         int[][] matrix = new int[n][n];
         if (n == 1) {
             matrix[0][0] = 1;
