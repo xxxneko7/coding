@@ -1,10 +1,5 @@
 package com.sol.algorithm.solution.array;
 
-import java.io.FilterInputStream;
-import java.util.Arrays;
-import java.util.Hashtable;
-import java.util.TreeMap;
-
 /**
  * <a href='https://leetcode.cn/problems/ugly-number-ii/'>264. 丑数 II</a>
  */
